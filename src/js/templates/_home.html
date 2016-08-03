@@ -1,0 +1,81 @@
+<h1 ng-bind="vm.title"></h1>
+
+<h1 class='title text-center'>How much money could YOU save with Carefree Dental?</h1>
+
+<h2 class='text-center instructions'><span class='title'><strong>Step 1:</span> Select how many people are in your household<strong><span class='glyphicon glyphicon-question-sign toolTip'><span class="content">Text here!</span></span></h2>
+<div class="people">
+  <div>
+  <span ng-repeat='user in users track by $index' ng-click='setRows(user)' class="fa fa-smile-o icons" ng-class="{is_active: person.value >= user}"></span>
+</div>
+<h4 class='text-center' ng-show='step2Instructions'>Please select how many people are in your household before moving to step 2.</h4>
+</div>
+<div class='step2' ng-show='step2' >
+  <h2 class='text-center'><span class='title'><strong>Step 2:</span> See how much you could save by selecting the services you need below:</strong></h2>
+  <div class='step2Description'>
+    <h4 class='text-center grey'>The following dental savings information chart compares actual costs to discounted costs for common dental services.</h4>
+    <h4 class='text-center grey'>Check a few boxes to get started.</h4>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr class='tableDesc'>
+        <th class='FnLRows'></th>
+        <th class='preCheck rotate'>Oral Exam</th>
+        <th class='preCheck rotate'>Cleaning</th>
+        <th class='preCheck rotate'>Filling</th>
+        <th class='preCheck rotate'>X-Rays</th>
+        <th class='preCheck rotate'>Root Canal</th>
+        <th class='preCheck rotate'>Crown</th>
+        <th class='preCheck rotate'>Upper Denture</th>
+        <th class='preCheck rotate'>Braces</th>
+        <th class='FnLRows'></th>
+      </tr>
+    </thead>
+    <thead class='tableHead table-bordered'>
+      <tr>
+        <th class='FnLRows'><strong># of Individuals</strong></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll"  value='1'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='2'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='3'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='4'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='5'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='6'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='7'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='8'></th>
+        <th class='FnLRows'><strong>Annual Savings*</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="i in tableRows track by $index">
+        <td>Person {{$index+1}}</td>
+        <td><input type="checkbox" class="group-1 checkTable" value='1' data-value='prices.oral' ng-change='checked(prices.oral, $index, oral)' ng-model='oral'></td>
+        <td><input type="checkbox" class="group-2 checkTable" value='2' data-value='prices.cleaning' ng-change='checked(prices.cleaning, $index, cleaning)' ng-model='cleaning'></td>
+        <td><input type="checkbox" class="group-3 checkTable" value='3' data-value='prices.filling' ng-change='checked(prices.filling, $index, filling)'  ng-model='filling'></td>
+        <td><input type="checkbox" class="group-4 checkTable" value='4' data-value='prices.xray' ng-change='checked(prices.xray, $index, xray)' ng-model='xray'></td>
+        <td><input type="checkbox" class="group-5 checkTable" value='5' data-value='prices.crown' ng-change='checked(prices.crown, $index, crown)'  ng-model='crown'></td>
+        <td><input type="checkbox" class="group-6 checkTable" value='6' data-value='prices.canal' ng-change='checked(prices.canal, $index, canal)' ng-model='canal' ></td>
+        <td><input type="checkbox" class="group-7 checkTable" value='7' data-value='prices.dentures' ng-change='checked(prices.dentures, $index, dentures)'  ng-model='dentures'></td>
+        <td><input type="checkbox" class="group-8 checkTable" value='8' data-value='prices.braces' ng-change='checked(prices.braces, $index, braces)' ng-model='braces' ></td>
+        <td class='FnLRows'><strong>${{i.analCost}}</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="addRow">
+    <a href="#" ng-click='addRow()'><span>+Add another person<span></a>
+    <p>*This is an example only. Actual costs and savings vary by provider, service and geographical area. Cost of card $191.40. ($15.95/mo for 12 months)</p>
+  </div>
+  <div class="bottomInfo">
+    <div class="left text-center">
+  <h2><strong>Cost of the CareFree Dental Card:</strong></h2>
+  <h1 class='total'>$15.95/mo</h1>
+  <p>Annual cost of the CareFree Dental Card is $191.40.</p>
+    </div>
+    <div class="right text-center">
+  <h2><strong>Estimated Yearly Savings:</strong></h2>
+  <h1 class='total'>${{totalSavings()}}</h1>
+  <p>Thats {{moneyWorth(total)}} movie tickets!</p>
+    </div>
+  </div>
+  <div class="button">
+    <a href="#"><div class="leftLinks text-center"><h3>Signup & Start Saving Today!</h3></div></a>
+  </div>
+</div>
