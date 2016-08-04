@@ -1,6 +1,4 @@
-var HomeController = function ($scope, $timeout) {
-
-    var people = require('../people.json');
+var HomeController = function ($scope) {
     $scope.tableRows = [];
     $scope.users = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
     $scope.step2Instructions = true;
@@ -14,6 +12,15 @@ var HomeController = function ($scope, $timeout) {
         $scope.tableRows = [];
         for (var i = 0; i < num; i++) {
           $scope.tableRows[i] = {
+            "oral": false,
+            "cleaning": false,
+            "filling": false,
+            "xray": false,
+            "crown": false,
+            "canal": false,
+            "dentures": false,
+            "braces": false,
+            "visible": false,
             "subtotal": 0
           };
           $scope.person.value = num;
@@ -25,16 +32,31 @@ var HomeController = function ($scope, $timeout) {
       $scope.step2 = true;
     }
     $scope.selectAll = function(procedure, checked) {
-      if (checked) {
-      $timeout(function() {
-      angular.element('.'+procedure).trigger('click');
-    }, 0);
-    } else if (!checked) {
-      $timeout(function() {
-        angular.element('.'+procedure).trigger('click');
-      }, 0);
-    }
+      if(checked == true) {
+    angular.forEach($scope.tableRows, function(person, index) {
+      if (person.procedure == false) {
+        return
+      }
+      if(person.procedure == undefined) {
+        person.procedure = true;
+      }
+      if(person.procedure == true){
+        person.procedure = false;
+      }
+      $scope.checked($scope.prices[procedure], index, checked, procedure);
+    });
+  } else if(checked == false) {
+    console.log('it was false');
+    angular.forEach($scope.tableRows, function(person, index) {
+      if(person.procedure == true) {
+        person.procedure = false;
+      } else if(person.procedure != checked) {
+        return;
+      }
+      $scope.checked($scope.prices[procedure], index, checked, procedure);
+    });
   }
+};
     $scope.addRow = function () {
       $scope.tableRows.push({subtotal: 0})
     }
@@ -62,9 +84,21 @@ var HomeController = function ($scope, $timeout) {
     $scope.dollarAmmount = 0.00;
     $scope.checked = function(amount, position, checked, procedure) {
         if (checked) {
+          angular.forEach($scope.tableRows, function (person, index) {
+            if (index == position) {
+              $scope.tableRows[position][procedure] = true;
+              person.procedure = false;
+            }
+          })
             $scope.dollarAmmount = $scope.dollarAmmount + amount;
             $scope.tableRows[position].subtotal += amount;
         } else if(!checked){
+          angular.forEach($scope.tableRows, function (person, index) {
+            if (index == position) {
+              $scope.tableRows[position][procedure] = false;
+              person.procedure = true;
+            }
+          })
             $scope.dollarAmmount = $scope.dollarAmmount - amount;
             $scope.tableRows[position].subtotal -= amount;
         }
@@ -76,5 +110,5 @@ var HomeController = function ($scope, $timeout) {
     }
 };
 
-HomeController.$inject = ['$scope', '$timeout'];
+HomeController.$inject = ['$scope'];
 module.exports = HomeController;
