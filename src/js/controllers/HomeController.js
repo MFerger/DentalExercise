@@ -34,14 +34,11 @@ var HomeController = function ($scope) {
     $scope.selectAll = function(procedure, checked) {
       if(checked == true) {
     angular.forEach($scope.tableRows, function(person, index) {
-      if (person.procedure == false) {
-        return
-      }
-      if(person.procedure == undefined) {
+      if(person.procedure == undefined || person.procedure == false) {
         person.procedure = true;
       }
-      if(person.procedure == true){
-        person.procedure = false;
+      if (person.procedure == false) {
+        return
       }
       $scope.checked($scope.prices[procedure], index, checked, procedure);
     });
