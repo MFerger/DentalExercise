@@ -1,19 +1,29 @@
 var HomeController = function ($scope) {
+
+    var people = require('../people.json');
     $scope.tableRows = [];
     $scope.users = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
     $scope.step2Instructions = true;
     $scope.step2 = false;
     $scope.total = 0;
     $scope.person = {
-      'value': 0
+      'value': 0,
     }
     $scope.setRows = function(num) {
       if($scope.person.value == 0){
         $scope.tableRows = [];
         for (var i = 0; i < num; i++) {
           $scope.tableRows[i] = {
-            checked: false,
-            analCost: 0
+            "oral": false,
+            "cleaning": false,
+            "filling": false,
+            "xray": false,
+            "crown": false,
+            "canal": false,
+            "dentures": false,
+            "braces": false,
+            "visible": false,
+            "analCost": 0
           };
           $scope.person.value = num;
         }
@@ -23,6 +33,17 @@ var HomeController = function ($scope) {
       $scope.step2Instructions = false;
       $scope.step2 = true;
     }
+    $scope.selectAll = function(procedure, checked) {
+      if (checked) {
+      angular.forEach($scope.tableRows, function (person) {
+        person.oral = true;
+      })
+    } else if (!checked) {
+      angular.forEach($scope.tableRows, function (person) {
+        person.oral = false;
+      })
+    }
+  }
     $scope.addRow = function () {
       $scope.tableRows.push({analCost: 0})
     }
@@ -48,11 +69,21 @@ var HomeController = function ($scope) {
       return total;
     }
     $scope.dollarAmmount = 0.00;
-    $scope.checked = function(amount, position, checked) {
+    $scope.checked = function(amount, position, checked, procedure) {
         if (checked) {
+          angular.forEach($scope.tableRows, function (person, index) {
+            if (index == position) {
+              person.procedure = false;
+            }
+          })
             $scope.dollarAmmount = $scope.dollarAmmount + amount;
             $scope.tableRows[position].analCost += amount;
         } else if(!checked){
+          angular.forEach($scope.tableRows, function (person, index) {
+            if (index == position) {
+              person.procedure = true;
+            }
+          })
             $scope.dollarAmmount = $scope.dollarAmmount - amount;
             $scope.tableRows[position].analCost -= amount;
         }

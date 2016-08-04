@@ -33,28 +33,28 @@
     <thead class='tableHead table-bordered'>
       <tr>
         <th class='FnLRows'><strong># of Individuals</strong></th>
-        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll"  value='1'></th>
-        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='2'></th>
-        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='3'></th>
-        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='4'></th>
-        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='5'></th>
-        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='6'></th>
-        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='7'></th>
-        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='8'></th>
+        <th class='text-center check'>Select All<br><input type="checkbox" class="selectAll" value='1' ng-change='selectAll("oral", oralC)' ng-model='oralC'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='2' ng-change='selectAll("cleaning", cleaningP)' ng-model='cleaningP'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='3' ng-change='selectAll("filling", fillingP)' ng-model='fillingP'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='4' ng-change='selectAll("xray", xrayP)' ng-model='xrayP'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='5' ng-change='selectAll("crown", crownP)' ng-model='crownP'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='6' ng-change='selectAll("canal", canalP)' ng-model='canalP'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='7' ng-change='selectAll("dentures", denturesP)' ng-model='denturesP'></th>
+        <th class='text-center selectHeader check'>Select All<br><input type="checkbox" class="selectAll" value='8' ng-change='selectAll("braces", bracesP)' ng-model='bracesP'></th>
         <th class='FnLRows'><strong>Annual Savings*</strong></th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="i in tableRows track by $index">
         <td>Person {{$index+1}}</td>
-        <td><input type="checkbox" class="group-1 checkTable" value='1' data-value='prices.oral' ng-change='checked(prices.oral, $index, oral)' ng-model='oral'></td>
-        <td><input type="checkbox" class="group-2 checkTable" value='2' data-value='prices.cleaning' ng-change='checked(prices.cleaning, $index, cleaning)' ng-model='cleaning'></td>
-        <td><input type="checkbox" class="group-3 checkTable" value='3' data-value='prices.filling' ng-change='checked(prices.filling, $index, filling)'  ng-model='filling'></td>
-        <td><input type="checkbox" class="group-4 checkTable" value='4' data-value='prices.xray' ng-change='checked(prices.xray, $index, xray)' ng-model='xray'></td>
-        <td><input type="checkbox" class="group-5 checkTable" value='5' data-value='prices.crown' ng-change='checked(prices.crown, $index, crown)'  ng-model='crown'></td>
-        <td><input type="checkbox" class="group-6 checkTable" value='6' data-value='prices.canal' ng-change='checked(prices.canal, $index, canal)' ng-model='canal' ></td>
-        <td><input type="checkbox" class="group-7 checkTable" value='7' data-value='prices.dentures' ng-change='checked(prices.dentures, $index, dentures)'  ng-model='dentures'></td>
-        <td><input type="checkbox" class="group-8 checkTable" value='8' data-value='prices.braces' ng-change='checked(prices.braces, $index, braces)' ng-model='braces' ></td>
+        <td><input id='test' type="checkbox" class="group-1 checkTable test" value='1' data-value='prices.oral' ng-click='checked(prices.oral, $index, tableRows[$index].oral, "oral")' ng-model='tableRows[$index].oral'></td>
+        <td><input type="checkbox" class="group-2 checkTable" value='2' data-value='prices.cleaning' ng-change='checked(prices.cleaning, $index, tableRows[$index].cleaning, cleaning)' ng-model='tableRows[$index].cleaning'></td>
+        <td><input type="checkbox" class="group-3 checkTable" value='3' data-value='prices.filling' ng-change='checked(prices.filling, $index, tableRows[$index].filling, filling)'  ng-model='tableRows[$index].filling'></td>
+        <td><input type="checkbox" class="group-4 checkTable" value='4' data-value='prices.xray' ng-change='checked(prices.xray, $index, tableRows[$index].xray, xray)' ng-model='tableRows[$index].xray'></td>
+        <td><input type="checkbox" class="group-5 checkTable" value='5' data-value='prices.crown' ng-change='checked(prices.crown, $index, tableRows[$index].crown, crown)'  ng-model='tableRows[$index].crown'></td>
+        <td><input type="checkbox" class="group-6 checkTable" value='6' data-value='prices.canal' ng-change='checked(prices.canal, $index, tableRows[$index].canal, canal)' ng-model='tableRows[$index].canal' ></td>
+        <td><input type="checkbox" class="group-7 checkTable" value='7' data-value='prices.dentures' ng-change='checked(prices.dentures, $index, tableRows[$index].dentures, dentures)'  ng-model='tableRows[$index].dentures'></td>
+        <td><input type="checkbox" class="group-8 checkTable" value='8' data-value='prices.braces' ng-change='checked(prices.braces, $index, tableRows[$index].braces, braces)' ng-model='tableRows[$index].braces' ></td>
         <td class='FnLRows'><strong>${{i.analCost}}</strong></td>
       </tr>
     </tbody>
