@@ -1,4 +1,4 @@
-var HomeController = function ($scope) {
+var HomeController = function ($scope, $timeout) {
 
     var people = require('../people.json');
     $scope.tableRows = [];
@@ -14,16 +14,7 @@ var HomeController = function ($scope) {
         $scope.tableRows = [];
         for (var i = 0; i < num; i++) {
           $scope.tableRows[i] = {
-            "oral": false,
-            "cleaning": false,
-            "filling": false,
-            "xray": false,
-            "crown": false,
-            "canal": false,
-            "dentures": false,
-            "braces": false,
-            "visible": false,
-            "analCost": 0
+            "subtotal": 0
           };
           $scope.person.value = num;
         }
@@ -35,17 +26,17 @@ var HomeController = function ($scope) {
     }
     $scope.selectAll = function(procedure, checked) {
       if (checked) {
-      angular.forEach($scope.tableRows, function (person) {
-        person.oral = true;
-      })
+      $timeout(function() {
+      angular.element('.'+procedure).trigger('click');
+    }, 0);
     } else if (!checked) {
-      angular.forEach($scope.tableRows, function (person) {
-        person.oral = false;
-      })
+      $timeout(function() {
+        angular.element('.'+procedure).trigger('click');
+      }, 0);
     }
   }
     $scope.addRow = function () {
-      $scope.tableRows.push({analCost: 0})
+      $scope.tableRows.push({subtotal: 0})
     }
     $scope.prices = {
             oral: 100,
@@ -63,7 +54,7 @@ var HomeController = function ($scope) {
     $scope.totalSavings = function(){
       var total = 0;
       angular.forEach($scope.tableRows, function (values, index) {
-        total += values.analCost;
+        total += values.subtotal;
         $scope.total = total;
       })
       return total;
@@ -71,21 +62,11 @@ var HomeController = function ($scope) {
     $scope.dollarAmmount = 0.00;
     $scope.checked = function(amount, position, checked, procedure) {
         if (checked) {
-          angular.forEach($scope.tableRows, function (person, index) {
-            if (index == position) {
-              person.procedure = false;
-            }
-          })
             $scope.dollarAmmount = $scope.dollarAmmount + amount;
-            $scope.tableRows[position].analCost += amount;
+            $scope.tableRows[position].subtotal += amount;
         } else if(!checked){
-          angular.forEach($scope.tableRows, function (person, index) {
-            if (index == position) {
-              person.procedure = true;
-            }
-          })
             $scope.dollarAmmount = $scope.dollarAmmount - amount;
-            $scope.tableRows[position].analCost -= amount;
+            $scope.tableRows[position].subtotal -= amount;
         }
     };
     $scope.moneyWorth = function (amount) {
@@ -95,5 +76,5 @@ var HomeController = function ($scope) {
     }
 };
 
-HomeController.$inject = ['$scope'];
+HomeController.$inject = ['$scope', '$timeout'];
 module.exports = HomeController;

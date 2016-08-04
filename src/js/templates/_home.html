@@ -47,15 +47,15 @@
     <tbody>
       <tr ng-repeat="i in tableRows track by $index">
         <td>Person {{$index+1}}</td>
-        <td><input id='test' type="checkbox" class="group-1 checkTable test" value='1' data-value='prices.oral' ng-click='checked(prices.oral, $index, tableRows[$index].oral, "oral")' ng-model='tableRows[$index].oral'></td>
-        <td><input type="checkbox" class="group-2 checkTable" value='2' data-value='prices.cleaning' ng-change='checked(prices.cleaning, $index, tableRows[$index].cleaning, cleaning)' ng-model='tableRows[$index].cleaning'></td>
-        <td><input type="checkbox" class="group-3 checkTable" value='3' data-value='prices.filling' ng-change='checked(prices.filling, $index, tableRows[$index].filling, filling)'  ng-model='tableRows[$index].filling'></td>
-        <td><input type="checkbox" class="group-4 checkTable" value='4' data-value='prices.xray' ng-change='checked(prices.xray, $index, tableRows[$index].xray, xray)' ng-model='tableRows[$index].xray'></td>
-        <td><input type="checkbox" class="group-5 checkTable" value='5' data-value='prices.crown' ng-change='checked(prices.crown, $index, tableRows[$index].crown, crown)'  ng-model='tableRows[$index].crown'></td>
-        <td><input type="checkbox" class="group-6 checkTable" value='6' data-value='prices.canal' ng-change='checked(prices.canal, $index, tableRows[$index].canal, canal)' ng-model='tableRows[$index].canal' ></td>
-        <td><input type="checkbox" class="group-7 checkTable" value='7' data-value='prices.dentures' ng-change='checked(prices.dentures, $index, tableRows[$index].dentures, dentures)'  ng-model='tableRows[$index].dentures'></td>
-        <td><input type="checkbox" class="group-8 checkTable" value='8' data-value='prices.braces' ng-change='checked(prices.braces, $index, tableRows[$index].braces, braces)' ng-model='tableRows[$index].braces' ></td>
-        <td class='FnLRows'><strong>${{i.analCost}}</strong></td>
+        <td><input type="checkbox" class="group-1 checkTable oral" value='1' data-value='prices.oral' ng-click='checked(prices.oral, $index, tableRows[$index].oral, "oral")' ng-model='tableRows[$index].oral'></td>
+        <td><input type="checkbox" class="group-2 checkTable cleaning" value='2' data-value='prices.cleaning' ng-change='checked(prices.cleaning, $index, tableRows[$index].cleaning, cleaning)' ng-model='tableRows[$index].cleaning'></td>
+        <td><input type="checkbox" class="group-3 checkTable filling" value='3' data-value='prices.filling' ng-change='checked(prices.filling, $index, tableRows[$index].filling, filling)'  ng-model='tableRows[$index].filling'></td>
+        <td><input type="checkbox" class="group-4 checkTable xray" value='4' data-value='prices.xray' ng-change='checked(prices.xray, $index, tableRows[$index].xray, xray)' ng-model='tableRows[$index].xray'></td>
+        <td><input type="checkbox" class="group-5 checkTable crown" value='5' data-value='prices.crown' ng-change='checked(prices.crown, $index, tableRows[$index].crown, crown)'  ng-model='tableRows[$index].crown'></td>
+        <td><input type="checkbox" class="group-6 checkTable canal" value='6' data-value='prices.canal' ng-change='checked(prices.canal, $index, tableRows[$index].canal, canal)' ng-model='tableRows[$index].canal' ></td>
+        <td><input type="checkbox" class="group-7 checkTable dentures" value='7' data-value='prices.dentures' ng-change='checked(prices.dentures, $index, tableRows[$index].dentures, dentures)'  ng-model='tableRows[$index].dentures'></td>
+        <td><input type="checkbox" class="group-8 checkTable braces" value='8' data-value='prices.braces' ng-change='checked(prices.braces, $index, tableRows[$index].braces, braces)' ng-model='tableRows[$index].braces' ></td>
+        <td class='FnLRows'><strong>${{i.subtotal}}</strong></td>
       </tr>
     </tbody>
   </table>
