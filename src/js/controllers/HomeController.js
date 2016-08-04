@@ -34,22 +34,15 @@ var HomeController = function ($scope) {
     $scope.selectAll = function(procedure, checked) {
       if(checked == true) {
     angular.forEach($scope.tableRows, function(person, index) {
-      if(person.procedure == undefined || person.procedure == false) {
-        person.procedure = true;
-      }
-      if (person.procedure == false) {
+      if (person[procedure] == false) {
+        person[procedure] = true;
+      } else if (person[procedure] == true) {
         return
       }
       $scope.checked($scope.prices[procedure], index, checked, procedure);
     });
   } else if(checked == false) {
-    console.log('it was false');
     angular.forEach($scope.tableRows, function(person, index) {
-      if(person.procedure == true) {
-        person.procedure = false;
-      } else if(person.procedure != checked) {
-        return;
-      }
       $scope.checked($scope.prices[procedure], index, checked, procedure);
     });
   }
