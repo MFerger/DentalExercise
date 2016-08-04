@@ -77,7 +77,6 @@ var HomeController = function ($scope) {
           angular.forEach($scope.tableRows, function (person, index) {
             if (index == position) {
               $scope.tableRows[position][procedure] = true;
-              person.procedure = false;
             }
           })
             $scope.dollarAmmount = $scope.dollarAmmount + amount;
@@ -86,7 +85,6 @@ var HomeController = function ($scope) {
           angular.forEach($scope.tableRows, function (person, index) {
             if (index == position) {
               $scope.tableRows[position][procedure] = false;
-              person.procedure = true;
             }
           })
             $scope.dollarAmmount = $scope.dollarAmmount - amount;
